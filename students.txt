@@ -1,0 +1,5 @@
+John	21	3.89
+Sally	19	2.56
+Alice	22	3.76
+Doug	19	1.98
+Susan	26	3.25
