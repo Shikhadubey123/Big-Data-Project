@@ -1,0 +1,43 @@
+Pig -Grunt shell
+Load the Dataset
+A = LOAD 'students.txt';  ---Do you thing this will work, no we don't given Location ,but we did't got any  error, A is Kind of Variable because by defalut Pig is kind of Lazy evalution.
+dump A; # dump is command which shows output
+A = LOAD '/user/dubeyshikha7278907/Pig Data/students.txt';
+dump A;
+Each line of data as Tuple
+In pig we can also attach schema
+describe A; schema is unknown,because we do not specify datatype and columns /headers kind of thing
+A = LOAD '/user/dubeyshikha7278907/Pig Data/students.txt'As(name,age,gpa);
+describe A; # defalut datatype
+A = LOAD '/user/dubeyshikha7278907/Pig Data/students.txt'As(name:chararray,age:int,gpa:float);
+describe A;
+dump A; # In case of Pig is nothing like columns,column headher,schema is attached to every row of data
+[1]    FILTER OPERATOR
+A = LOAD '/user/dubeyshikha7278907/Pig Data/students.txt'As(name:chararray,age:int,gpa:float);
+R = FILTER A BY age>=20;
+dump R; # FILTER condition even apply to multiple columns
+R = FILTER A BY (age>=20)AND(gpa>3.5);
+dump R;
+
+[2]   FOREACH OPERATOR
+select * from A
+R = foreach A generate*; #* means all columns
+dump R;
+R = foreach A generate name;
+dump R; is used to select column
+
+[3]  GROUP OPERATOR
+B = GROUP A  BY age;
+dump B; #Grouping key is age ex-which ever tuple we are matching we are getting output..
+  
+  
+[4]  IS NULL/ IS NOT NULL OPERATOR
+pig comes with their own language called pig(Latin)
+Apache pig is supported by Hadoop
+The Actual pig is Data Cleaning, then what is meaning by Cleaning pig can also work on unstructed data and text file...
+
+Apache Hive(SQL Language)
+There are two types of table Hive
+(1) MANAGED_TABLE - means hive managed your data,bydefalut,Create table
+(2) EXTERNAL_TABLE - Create external table ,use can decide where the table will be ie Loctaion..
+        

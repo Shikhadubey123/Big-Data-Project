@@ -1,0 +1,69 @@
+Movie_ID:int,Movie_name:chararray,Year_of_release:int,Rating_of_the_movie:float,Movie_duration_in_seconds:int
+
+moviedata = LOAD '/user/dubeyshikha7278907/Pig Data/movies_data.csv' USING PigStorage(',') 
+AS (Movie_ID:int,Movie_name:chararray,Year_of_release:int,Rating_of_the_movie:float,Movie_duration_in_seconds:int);
+
+A. Find the number of movies released between 1950 and 1960.
+
+moviedatagrouped = GROUP  moviedata BY Year_of_release;
+moviedatacount = FOREACH  moviedatagrouped GENERATE COUNT(moviedata.Year_of_release) AS MovieCount,group;
+moviedatafilter = FILTER  moviedatacount BY group >= 1950 AND group <= 1960;
+moviedatagroupedall = GROUP  moviedatafilter ALL;
+moviedatasum = FOREACH  moviedatagroupedall GENERATE group,SUM(moviedatafilter.MovieCount);
+DUMP  moviedatasum;
+
+OR
+
+moviedatafilter = FILTER  moviedata BY Year_of_release >= 1950 AND Year_of_release <= 1960;
+moviedataall = GROUP  moviedatafilter ALL;
+moviedatacount = FOREACH  moviedataall GENERATE COUNT(moviedatafilter);
+DUMP  moviedatacount;
+
+
+B. Find the number of movies having rating more than 4.
+
+moviedatagrouped = GROUP  moviedata BY Rating_of_the_movie;
+moviedatacount = FOREACH  moviedatagrouped GENERATE COUNT(moviedata.Rating_of_the_movie) AS MovieRatingCount,group;
+moviedatafilter = FILTER  moviedatacount BY group > 4;
+moviedatagroupedall = GROUP  moviedatafilter ALL;
+moviedatasum = FOREACH  moviedatagroupedall GENERATE group,SUM(moviedatafilter.MovieRatingCount);
+DUMP  moviedatasum;
+
+OR
+
+moviedatafilter = FILTER  moviedata BY Rating_of_the_movie > 4;
+moviedatagroupedall = GROUP  moviedatafilter ALL;
+moviedatasum = FOREACH  moviedatagroupedall GENERATE COUNT(moviedatafilter);
+DUMP  moviedatasum;
+
+
+
+C. Find the movies whose rating are between 3 and 4.
+
+moviedatafilter = FILTER  moviedata BY Rating_of_the_movie >= 3 AND Rating_of_the_movie <= 4;
+datamovie = FOREACH  moviedatafilter GENERATE Movie_name;
+DUMP  datamovie;
+
+D. Find the number of movies with duration more than 2 hours (7200 second).
+
+moviedatafilter = FILTER moviedata BY Movie_duration_in_seconds > 7200;
+datamovie = GROUP  moviedatafilter BY Year_of_release;
+hmoviedatacount = FOREACH datamovie GENERATE COUNT(moviedatafilter.Movie_duration_in_seconds) AS Movie_durationCount,group;
+moviedatagroupedall = GROUP  moviedatacount ALL;
+moviedatanumber = FOREACH  moviedatagroupedall GENERATE group,SUM(moviedatacount.Movie_durationCount);
+DUMP  moviedatanumber;
+
+E. Find the list of years and number of movies released each year.
+
+moviedatagrouped = GROUP  moviedata BY Year_of_release;
+moviedatacount = FOREACH  moviedatagrouped GENERATE COUNT(moviedata.Year_of_release) AS MovieCount,group;
+DUMP  moviedatacount;
+
+F. Find the total number of movies in the dataset.
+
+moviedatagrouped = GROUP  moviedata BY Rating_of_the_movie;
+moviedatacount = FOREACH  moviedatagrouped GENERATE COUNT(moviedata.Movie_name) AS MovieCount,group;
+moviedatagroupedall = GROUP  moviedatacount ALL;
+moviedatasum = FOREACH  moviedatagroupedall GENERATE group,SUM(moviedatacount.MovieCount);
+DUMP  moviedatasum;
+
