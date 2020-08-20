@@ -1,0 +1,35 @@
+Hapdoop  =  Storage + Resource Management + Processing.
+Storage  =  HDFS (Hadoop Distributed File System).
+Resource Management  = YARN.
+Processing = MapReduce[default],Tez,Spark,Impala etc........
+
+Big Data --> Mr.Hadoop say he has Solution to our Big Data 
+(1)  HDFS 
+MapReduce  =  Apace Hive , Apace Pig these use internally as MapReduce,but  no one  write MapReduce Programs
+Pig Hive  =  Tab delimited - Computer Definition
+A text file format that uses tab characters as separators between fields by default
+we can also comma separated files....
+[1] web console = command line connection to Lab
+[2] Jupyter = Notebook Environment
+[3] Hue = Graphical Interphase is used to upload the data and download the data,if we have to Analyse the data then we use Hue.
+[4] Ambari = it is not used by developer,it is used by administors to monitor the cluster ,Manage the cluster ,Adding new machine,etc..
+  
+  
+ (2)  Hadoop Ecosystem
+[1] Hadoop was created in 2005
+[2] there are many tools that we install on the top of hadoop
+[3] oozie--Workflow manager on top of hadoop ,oozie is not a programming languages.
+[4] sqoop - data collection ,data transfer...
+[5] flume  -- data collection,data transfer,Same sqoop.
+[6] Mahut -- machine learning  Library  on the top of hadoop,it is one of the way on the top of hadoop 
+[7] drill -- another sql,drill is faster than Hive,it can be used for interactive Quary and so,on.
+[8] H-base -no sql database
+[9] zookeeper - it is  kind of  a coodinator..
+Then what is Hadoop ecosystem
+(a) It is hadoop and all the tools are installed on the top of hadoop..
+
+  (3)   Hive.
+Hive is a data warehouse infrastructure which is build on top of hadoop
+Hive provides a mechanism to project structure into the data and query the data using SQL-like languages called HiveQL..
+Hive was created by facebook and hive and pig are very simliar and working with hive is more confortable because they use sql  Languages.
+
